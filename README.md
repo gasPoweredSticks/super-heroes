@@ -2,9 +2,17 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.0.
 
+## Install packages
+
+Run `npm i` 
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
+## Run Storybook
+
+Run `npm run storybook` for storybook (building component driven UIs faster) (https://storybook.js.org/). Navigate to `http://localhost:6006/?path=/story/datepicker--primary`. 
 
 ## Code scaffolding
 

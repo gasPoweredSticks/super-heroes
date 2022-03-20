@@ -1,0 +1,109 @@
+<div class="bg-white shadow-md rounded font-mono-hat text-xs">
+  <div class="px-6 py-4 flex items-center justify-between">
+    <p class="font-bold">Heroes</p>
+
+    <div class="flex items-center">
+      <button
+        (click)="searchByName()"
+        class="
+          flex
+          items-center
+          border-0 border-b-2
+          appearance-none
+          focus:border-gray-500
+          border-gray-200
+        "
+      >
+        <input
+          [(ngModel)]="searchName"
+          *ngIf="showSearch"
+          type="text"
+          class="
+            pt-3
+            pb-2
+            block
+            w-full
+            mr-4
+            px-0
+            mt-0
+            bg-transparent
+            focus:outline-none
+            focus:border-gray-500
+            focus:ring-0
+          "
+          placeholder="Search hero by name"
+        />
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="#b8b8b8"
+          stroke-width="2"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+          />
+        </svg>
+      </button>
+
+      <button (click)="toggleFilter.emit()" [ngClass]="rotateIcon()">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5 transform rotate-90 ml-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="#b8b8b8"
+          stroke-width="2"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
+          />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <table class="text-left w-full border-collapse">
+    <thead>
+      <tr class="bg-gray-100">
+        <th class="px-6 py-4">Name</th>
+        <th class="px-6 py-4">Phone</th>
+        <th class="px-6 py-4">Email</th>
+        <th class="px-6 py-4">Date</th>
+        <th class="px-6 py-4">Country</th>
+        <th class="px-6 py-4">Company</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let heroe of heroes">
+      <tr class="hover:bg-grey-lighter">
+        <td class="py-4 px-6 border-b border-grey-light capitalize">{{ heroe.name }}</td>
+        <td class="py-4 px-6 border-b border-grey-light">
+          {{ heroe.phone }}
+        </td>
+        <td class="py-4 px-6 border-b border-grey-light">
+          {{ heroe.email }}
+        </td>
+        <td class="py-4 px-6 border-b border-grey-light">
+          {{ heroe.date }}
+        </td>
+        <td class="py-4 px-6 border-b border-grey-light">
+          {{ heroe.country }}
+        </td>
+        <td class="py-4 px-6 border-b border-grey-light">
+          {{ heroe.company }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<style>
+  .rotate-icon {
+    transform: rotate(0deg);
+  }
+</style>

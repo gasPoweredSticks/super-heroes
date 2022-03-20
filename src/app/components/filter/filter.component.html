@@ -1,0 +1,234 @@
+<div class="bg-white p-4 flex flex-col items-center">
+  <h1 class="uppercase text-center text-3xl font-bold">Filters</h1>
+  <hr class="my-8" />
+
+  <form name="myForm" class="w-full">
+    <input
+      [(ngModel)]="emailValue"
+      type="email"
+      class="
+        pt-3
+        pb-2
+        block
+        w-full
+        px-0
+        mt-0
+        bg-transparent
+        border-0 border-b-2
+        appearance-none
+        focus:outline-none
+        focus:ring-0
+        focus:border-gray-400
+        border-gray-200
+      "
+      placeholder="example@gmail.com"
+    />
+
+    <input
+      [(ngModel)]="phoneValue"
+      type="tel"
+      class="
+        pt-3
+        pb-2
+        block
+        w-full
+        px-0
+        mt-8
+        bg-transparent
+        border-0 border-b-2
+        appearance-none
+        focus:outline-none
+        focus:ring-0
+        focus:border-gray-400
+        border-gray-200
+      "
+      placeholder="123456789"
+    />
+
+    <input
+      [(ngModel)]="nameValue"
+      type="text"
+      class="
+        pt-3
+        pb-2
+        block
+        w-full
+        px-0
+        mt-8
+        bg-transparent
+        border-0 border-b-2
+        appearance-none
+        focus:outline-none
+        focus:ring-0
+        focus:border-gray-400
+        border-gray-200
+      "
+      placeholder="John Doe"
+    />
+
+    <input
+      [(ngModel)]="companyValue"
+      type="text"
+      class="
+        pt-3
+        pb-2
+        block
+        w-full
+        px-0
+        mt-8
+        bg-transparent
+        border-0 border-b-2
+        appearance-none
+        focus:outline-none
+        focus:ring-0
+        focus:border-gray-400
+        border-gray-200
+      "
+      placeholder="Company"
+    />
+
+    <div class="inline-block relative mt-8 w-full">
+      <div class="relative z-0 w-full">
+        <select
+          name="select"
+          value=""
+          [(ngModel)]="countryValue"
+          onclick="this.setAttribute('value', this.value);"
+          class="
+            pt-3
+            pb-2
+            block
+            w-full
+            px-0
+            mt-0
+            bg-transparent
+            border-0 border-b-2
+            appearance-none
+            z-1
+            focus:outline-none
+            focus:ring-0
+            focus:border-gray-400
+            border-gray-200
+          "
+        >
+          <option value="" selected disabled hidden></option>
+          <option value="1">USA</option>
+          <option value="2">Option 2</option>
+          <option value="3">Option 3</option>
+          <option value="4">Option 4</option>
+          <option value="5">Option 5</option>
+        </select>
+        <label
+          for="select"
+          class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500 mb-6"
+          >Country</label
+        >
+        <span class="text-sm text-red-600 hidden" id="error"
+          >Option has to be selected</span
+        >
+      </div>
+      <div
+        class="
+          pointer-events-none
+          absolute
+          inset-y-0
+          right-0
+          flex
+          items-center
+          px-2
+          text-gray-700
+        "
+      >
+        <svg
+          class="fill-current h-4 w-4"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+        >
+          <path
+            d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+          />
+        </svg>
+      </div>
+    </div>
+
+    <datepicker></datepicker>
+
+    <div class="text-center">
+      <button
+        (click)="filter()"
+        type="button"
+        class="
+          text-white
+          bg-blue-600
+          hover:bg-blue-800
+          focus:ring-4 focus:ring-blue-300
+          font-medium
+          rounded
+          text-sm
+          px-5
+          py-2.5
+          text-center
+          inline-flex
+          items-center
+          mr-2
+          dark:bg-blue-600
+          dark:hover:bg-blue-700
+          dark:focus:ring-blue-800
+        "
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-4 w-4 mr-2"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="#FFF"
+          stroke-width="2"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"
+          />
+        </svg>
+        Filter
+      </button>
+    </div>
+  </form>
+</div>
+
+<style>
+  .-z-1 {
+    z-index: -1;
+  }
+
+  .origin-0 {
+    transform-origin: 0%;
+  }
+
+  input:focus ~ label,
+  input:not(:placeholder-shown) ~ label,
+  textarea:focus ~ label,
+  textarea:not(:placeholder-shown) ~ label,
+  select:focus ~ label,
+  select:not([value=""]):valid ~ label {
+    --tw-translate-x: 0;
+    --tw-translate-y: 0;
+    --tw-rotate: 0;
+    --tw-skew-x: 0;
+    --tw-skew-y: 0;
+    transform: translateX(var(--tw-translate-x))
+      translateY(var(--tw-translate-y)) rotate(var(--tw-rotate))
+      skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x))
+      scaleY(var(--tw-scale-y));
+    --tw-scale-x: 0.75;
+    --tw-scale-y: 0.75;
+    --tw-translate-y: -1.5rem;
+  }
+
+  input:focus ~ label,
+  select:focus ~ label {
+    --tw-text-opacity: 1;
+    color: rgba(0, 0, 0, var(--tw-text-opacity));
+    left: 0px;
+  }
+</style>

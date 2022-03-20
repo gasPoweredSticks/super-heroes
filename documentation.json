@@ -1,20 +1,249 @@
 {
     "pipes": [],
-    "interfaces": [
+    "interfaces": [],
+    "injectables": [
         {
-            "name": "User",
-            "id": "interface-User-9c7e5f1bbbab702cb032307d130876cb68969b0cd4eedef32a0c8cad8081a54e5f8f577ed6ad4539c1b99a1d246cb34031d198c2ea8eba440e64e91b14f01fdc",
-            "file": "src/stories/User.ts",
+            "name": "CountriesService",
+            "id": "injectable-CountriesService-a1ecae60324ed5286e83575db105645b878ae24fbbdc8ad8284c4b3e9e3f4ceae59f3faba713587f5a6d852911e8f095f9c1cc84d065a6f926f9a86a0b7d85bf",
+            "file": "src/app/services/countries/countries.service.ts",
+            "properties": [
+                {
+                    "name": "apiUrl",
+                    "defaultValue": "'https://api.first.org/data/v1/countries'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 14
+                },
+                {
+                    "name": "headers",
+                    "defaultValue": "new HttpHeaders()\n    .set('Content-Type', 'application/json')\n    .set('Access-Control-Allow-Origin', '*')\n    .set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 15
+                }
+            ],
+            "methods": [
+                {
+                    "name": "handleError",
+                    "args": [
+                        {
+                            "name": "error",
+                            "type": "HttpErrorResponse",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 30,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "error",
+                            "type": "HttpErrorResponse",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "list",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "Observable<any>",
+                    "typeParameters": [],
+                    "line": 23,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
             "deprecated": false,
             "deprecationMessage": "",
-            "type": "interface",
-            "sourceCode": "export interface User {}\n",
-            "properties": [],
-            "indexSignatures": [],
-            "methods": []
+            "description": "",
+            "rawdescription": "\n",
+            "sourceCode": "import {\n  HttpClient,\n  HttpErrorResponse,\n  HttpHeaders,\n} from '@angular/common/http';\nimport { Injectable } from '@angular/core';\nimport { catchError } from 'rxjs/operators';\nimport { Observable, throwError } from 'rxjs';\n\n@Injectable({\n  providedIn: 'root',\n})\nexport class CountriesService {\n  apiUrl: string = 'https://api.first.org/data/v1/countries';\n  headers = new HttpHeaders()\n    .set('Content-Type', 'application/json')\n    .set('Access-Control-Allow-Origin', '*')\n    .set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');\n\n  constructor(private httpClient: HttpClient) {}\n\n  // Show lists of item\n  list(): Observable<any> {\n    return this.httpClient\n      .get(this.apiUrl, { headers: this.headers })\n      .pipe(catchError(this.handleError));\n  }\n\n  // Handle API errors\n  handleError(error: HttpErrorResponse) {\n    if (error.error instanceof ErrorEvent) {\n      console.error('An error occurred:', error.error.message);\n    } else {\n      console.error(\n        `Backend returned code ${error.status}, ` + `body was: ${error.error}`\n      );\n    }\n    return throwError('please try again later.');\n  }\n}\n",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "httpClient",
+                        "type": "HttpClient",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 18,
+                "jsdoctags": [
+                    {
+                        "name": "httpClient",
+                        "type": "HttpClient",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "type": "injectable"
+        },
+        {
+            "name": "HeroesService",
+            "id": "injectable-HeroesService-15e9073f8a843b09115fbf91ad6bdd57c2c354b05a83180339764e61d37e1a4421c082e1b7cfdebf6d622108a2fd9b788bd269ed7ea9d5e38e5a65c771673883",
+            "file": "src/app/services/heroes/heroes.service.ts",
+            "properties": [
+                {
+                    "name": "apiUrl",
+                    "defaultValue": "'http://localhost:3000/heroes'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 14
+                },
+                {
+                    "name": "headers",
+                    "defaultValue": "new HttpHeaders().set('Content-Type', 'application/json')",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 15
+                }
+            ],
+            "methods": [
+                {
+                    "name": "filterHeroes",
+                    "args": [
+                        {
+                            "name": "title",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "query",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "Observable<any>",
+                    "typeParameters": [],
+                    "line": 25,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "title",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "query",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "handleError",
+                    "args": [
+                        {
+                            "name": "error",
+                            "type": "HttpErrorResponse",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 32,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "error",
+                            "type": "HttpErrorResponse",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "list",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "Observable<any>",
+                    "typeParameters": [],
+                    "line": 20,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "description": "",
+            "rawdescription": "\n",
+            "sourceCode": "import {\n  HttpClient,\n  HttpErrorResponse,\n  HttpHeaders,\n} from '@angular/common/http';\nimport { Injectable } from '@angular/core';\nimport { catchError } from 'rxjs/operators';\nimport { Observable, throwError } from 'rxjs';\n\n@Injectable({\n  providedIn: 'root',\n})\nexport class HeroesService {\n  apiUrl: string = 'http://localhost:3000/heroes';\n  headers = new HttpHeaders().set('Content-Type', 'application/json');\n\n  constructor(private httpClient: HttpClient) {}\n\n  // Show lists of item\n  list(): Observable<any> {\n    return this.httpClient.get(this.apiUrl).pipe(catchError(this.handleError));\n  }\n\n  // Filter Heroes\n  filterHeroes(title: string, query: string): Observable<any> {\n    return this.httpClient\n      .get(`${this.apiUrl}?${query}=${title}`)\n      .pipe(catchError(this.handleError));\n  }\n\n  // Handle API errors\n  handleError(error: HttpErrorResponse) {\n    if (error.error instanceof ErrorEvent) {\n      console.error('An error occurred:', error.error.message);\n    } else {\n      console.error(\n        `Backend returned code ${error.status}, ` + `body was: ${error.error}`\n      );\n    }\n    return throwError('please try again later.');\n  }\n}\n",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "httpClient",
+                        "type": "HttpClient",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 15,
+                "jsdoctags": [
+                    {
+                        "name": "httpClient",
+                        "type": "HttpClient",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "type": "injectable"
         }
     ],
-    "injectables": [],
     "guards": [],
     "interceptors": [],
     "classes": [],
@@ -22,7 +251,7 @@
     "components": [
         {
             "name": "AppComponent",
-            "id": "component-AppComponent-1cc23ea2e2db52ed98f4bc5df3fbb02f8b6493e61b53d3f8c1bdaf5c6e17379d493bb10dc8d1a2e6e12ecad27a17176ba9ca95ee4291037aabb294007ec2f0a3",
+            "id": "component-AppComponent-654c2d58a341846f77586068867d20d38067977f9adf4b2eac4dded453b7ae2f46c5eeec153121da7f9f0fd18286fdf652c96fe48191585697dd53bf409d1496",
             "file": "src/app/app.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -42,17 +271,38 @@
             "outputsClass": [],
             "propertiesClass": [
                 {
-                    "name": "title",
-                    "defaultValue": "'super-heroes'",
+                    "name": "showFilter",
+                    "defaultValue": "true",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "string",
+                    "type": "boolean",
                     "optional": false,
                     "description": "",
                     "line": 9
                 }
             ],
-            "methodsClass": [],
+            "methodsClass": [
+                {
+                    "name": "getTableWidth",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "\"w-full\" | \"w-9/12 ease-in-out duration-100\"",
+                    "typeParameters": [],
+                    "line": 17,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "toggleFilter",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 11,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
             "deprecated": false,
             "deprecationMessage": "",
             "hostBindings": [],
@@ -60,7 +310,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-root',\n  templateUrl: './app.component.html',\n  styleUrls: ['./app.component.css']\n})\nexport class AppComponent {\n  title = 'super-heroes';\n}\n",
+            "sourceCode": "import { Input, Component } from '@angular/core';\n\n@Component({\n  selector: 'app-root',\n  templateUrl: './app.component.html',\n  styleUrls: ['./app.component.css'],\n})\nexport class AppComponent {\n  showFilter: boolean = true;\n\n  toggleFilter() {\n    setTimeout(() => {\n      this.showFilter = !this.showFilter;\n    }, 200);\n  }\n\n  getTableWidth() {\n    if (!this.showFilter) {\n      return `w-full`;\n    } else {\n      return `w-9/12 ease-in-out duration-100`;\n    }\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -69,264 +319,209 @@
                 }
             ],
             "stylesData": "",
-            "templateData": "<div class=\"bg-black h-screen\"></div>"
+            "templateData": "<div class=\"p-8\">\n  <div class=\"flex items-start\">\n    <div class=\"w-3/12\" [hidden]=\"!this.showFilter\">\n      <filter></filter>\n    </div>\n    <div class=\"ml-6\" [ngClass]=\"getTableWidth()\">\n      <heroes-table\n        (toggleFilter)=\"toggleFilter()\"\n        (showFilter)=\"(this.showFilter)\"\n      ></heroes-table>\n    </div>\n  </div>\n</div>\n"
         },
         {
-            "name": "ButtonComponent",
-            "id": "component-ButtonComponent-4ef205c97a334c309aa4001c8ab4a6d9571dcae18d0e85aaf0d367467ab5d3a9f13ab3573726f1fcb409bc9b49894dadfb80b1bbe1b6ba7041455ad9d4922004",
-            "file": "src/stories/button.component.ts",
+            "name": "DatepickerComponent",
+            "id": "component-DatepickerComponent-395ad1c1421af12521acfef56233e47c6f14b11970e1b377d20f1dcf3e4e373edc753aef2a1bd60f9dfdc5754ed9dc43086cef7cffe40156c47c34ad2023c640",
+            "file": "src/app/components/datepicker/datepicker.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
             "outputs": [],
             "providers": [],
-            "selector": "storybook-button",
-            "styleUrls": [
-                "./button.css"
-            ],
+            "selector": "datepicker",
+            "styleUrls": [],
             "styles": [],
-            "template": "<button   type=\"button\"\n   (click)=\"onClick.emit($event)\"\n   [ngClass]=\"classes\"\n   [ngStyle]=\"{ 'background-color': backgroundColor }\"\n >\n   {{ label }}\n </button>",
-            "templateUrl": [],
-            "viewProviders": [],
-            "inputsClass": [
-                {
-                    "name": "backgroundColor",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "rawdescription": "\n\nWhat background color to use\n",
-                    "description": "<p>What background color to use</p>\n",
-                    "line": 26,
-                    "type": "string",
-                    "decorators": []
-                },
-                {
-                    "name": "label",
-                    "defaultValue": "'Button'",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "jsdoctags": [
-                        {
-                            "pos": 711,
-                            "end": 724,
-                            "flags": 4227072,
-                            "modifierFlagsCache": 0,
-                            "transformFlags": 0,
-                            "kind": 325,
-                            "tagName": {
-                                "pos": 712,
-                                "end": 720,
-                                "flags": 4227072,
-                                "modifierFlagsCache": 0,
-                                "transformFlags": 0,
-                                "kind": 79,
-                                "escapedText": "required"
-                            },
-                            "comment": ""
-                        }
-                    ],
-                    "rawdescription": "\n\nButton contents\n\n",
-                    "description": "<p>Button contents</p>\n",
-                    "line": 40,
-                    "type": "string",
-                    "decorators": []
-                },
-                {
-                    "name": "primary",
-                    "defaultValue": "false",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "rawdescription": "\n\nIs this the principal call to action on the page?\n",
-                    "description": "<p>Is this the principal call to action on the page?</p>\n",
-                    "line": 20,
-                    "type": "boolean",
-                    "decorators": []
-                },
-                {
-                    "name": "size",
-                    "defaultValue": "'medium'",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "rawdescription": "\n\nHow large should the button be?\n",
-                    "description": "<p>How large should the button be?</p>\n",
-                    "line": 32,
-                    "type": "\"small\" | \"medium\" | \"large\"",
-                    "decorators": []
-                }
+            "templateUrl": [
+                "./datepicker.component.html"
             ],
-            "outputsClass": [
-                {
-                    "name": "onClick",
-                    "defaultValue": "new EventEmitter<Event>()",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "rawdescription": "\n\nOptional click handler\n",
-                    "description": "<p>Optional click handler</p>\n",
-                    "line": 46,
-                    "type": "EventEmitter"
-                }
-            ],
-            "propertiesClass": [],
-            "methodsClass": [],
-            "deprecated": false,
-            "deprecationMessage": "",
-            "hostBindings": [],
-            "hostListeners": [],
-            "description": "",
-            "rawdescription": "\n",
-            "type": "component",
-            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\n\n@Component({\n  selector: 'storybook-button',\n  template: ` <button\n    type=\"button\"\n    (click)=\"onClick.emit($event)\"\n    [ngClass]=\"classes\"\n    [ngStyle]=\"{ 'background-color': backgroundColor }\"\n  >\n    {{ label }}\n  </button>`,\n  styleUrls: ['./button.css'],\n})\nexport default class ButtonComponent {\n  /**\n   * Is this the principal call to action on the page?\n   */\n  @Input()\n  primary = false;\n\n  /**\n   * What background color to use\n   */\n  @Input()\n  backgroundColor?: string;\n\n  /**\n   * How large should the button be?\n   */\n  @Input()\n  size: 'small' | 'medium' | 'large' = 'medium';\n\n  /**\n   * Button contents\n   *\n   * @required\n   */\n  @Input()\n  label = 'Button';\n\n  /**\n   * Optional click handler\n   */\n  @Output()\n  onClick = new EventEmitter<Event>();\n\n  public get classes(): string[] {\n    const mode = this.primary ? 'storybook-button--primary' : 'storybook-button--secondary';\n\n    return ['storybook-button', `storybook-button--${this.size}`, mode];\n  }\n}\n",
-            "assetsDirs": [],
-            "styleUrlsData": [
-                {
-                    "data": ".storybook-button {\n  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;\n  font-weight: 700;\n  border: 0;\n  border-radius: 3em;\n  cursor: pointer;\n  display: inline-block;\n  line-height: 1;\n}\n.storybook-button--primary {\n  color: white;\n  background-color: #1ea7fd;\n}\n.storybook-button--secondary {\n  color: #333;\n  background-color: transparent;\n  box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset;\n}\n.storybook-button--small {\n  font-size: 12px;\n  padding: 10px 16px;\n}\n.storybook-button--medium {\n  font-size: 14px;\n  padding: 11px 20px;\n}\n.storybook-button--large {\n  font-size: 16px;\n  padding: 12px 24px;\n}\n",
-                    "styleUrl": "./button.css"
-                }
-            ],
-            "stylesData": "",
-            "accessors": {
-                "classes": {
-                    "name": "classes",
-                    "getSignature": {
-                        "name": "classes",
-                        "type": "[]",
-                        "returnType": "string[]",
-                        "line": 48
-                    }
-                }
-            }
-        },
-        {
-            "name": "HeaderComponent",
-            "id": "component-HeaderComponent-a557eec14f72c438a8033301f4d6ce023e0a1844a3b06ec2b38794a612acc31735ae78a5ee10071b230c8c20d699eb914554e69d07ade54adb371da8efb464cc",
-            "file": "src/stories/header.component.ts",
-            "encapsulation": [],
-            "entryComponents": [],
-            "inputs": [],
-            "outputs": [],
-            "providers": [],
-            "selector": "storybook-header",
-            "styleUrls": [
-                "./header.css"
-            ],
-            "styles": [],
-            "template": "<header>    <div class=\"wrapper\">\n      <div>\n        <svg width=\"32\" height=\"32\" viewBox=\"0 0 32 32\" xmlns=\"http://www.w3.org/2000/svg\">\n          <g fill=\"none\" fillRule=\"evenodd\">\n            <path\n              d=\"M10 0h12a10 10 0 0110 10v12a10 10 0 01-10 10H10A10 10 0 010 22V10A10 10 0 0110 0z\"\n              fill=\"#FFF\"\n            />\n            <path\n              d=\"M5.3 10.6l10.4 6v11.1l-10.4-6v-11zm11.4-6.2l9.7 5.5-9.7 5.6V4.4z\"\n              fill=\"#555AB9\"\n            />\n            <path\n              d=\"M27.2 10.6v11.2l-10.5 6V16.5l10.5-6zM15.7 4.4v11L6 10l9.7-5.5z\"\n              fill=\"#91BAF8\"\n            />\n          </g>\n        </svg>\n        <h1>Acme</h1>\n      </div>\n      <div>\n        <div *ngIf=\"user\">\n          <span class=\"welcome\">\n            Welcome, <b>{{ user.name }}</b\n            >!\n          </span>\n          <storybook-button\n            *ngIf=\"user\"\n            size=\"small\"\n            (onClick)=\"onLogout.emit($event)\"\n            label=\"Log out\"\n          ></storybook-button>\n        </div>\n        <div *ngIf=\"!user\">\n          <storybook-button\n            *ngIf=\"!user\"\n            size=\"small\"\n            class=\"margin-left\"\n            (onClick)=\"onLogin.emit($event)\"\n            label=\"Log in\"\n          ></storybook-button>\n          <storybook-button\n            *ngIf=\"!user\"\n            primary\n            size=\"small\"\n            primary=\"true\"\n            class=\"margin-left\"\n            (onClick)=\"onCreateAccount.emit($event)\"\n            label=\"Sign up\"\n          ></storybook-button>\n        </div>\n      </div>\n    </div>\n  </header>",
-            "templateUrl": [],
-            "viewProviders": [],
-            "inputsClass": [
-                {
-                    "name": "user",
-                    "defaultValue": "null",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 65,
-                    "type": "User | null",
-                    "decorators": []
-                }
-            ],
-            "outputsClass": [
-                {
-                    "name": "onCreateAccount",
-                    "defaultValue": "new EventEmitter<Event>()",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 74,
-                    "type": "EventEmitter"
-                },
-                {
-                    "name": "onLogin",
-                    "defaultValue": "new EventEmitter<Event>()",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 68,
-                    "type": "EventEmitter"
-                },
-                {
-                    "name": "onLogout",
-                    "defaultValue": "new EventEmitter<Event>()",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 71,
-                    "type": "EventEmitter"
-                }
-            ],
-            "propertiesClass": [],
-            "methodsClass": [],
-            "deprecated": false,
-            "deprecationMessage": "",
-            "hostBindings": [],
-            "hostListeners": [],
-            "description": "",
-            "rawdescription": "\n",
-            "type": "component",
-            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\nimport { User } from './User';\n\n@Component({\n  selector: 'storybook-header',\n  template: `<header>\n    <div class=\"wrapper\">\n      <div>\n        <svg width=\"32\" height=\"32\" viewBox=\"0 0 32 32\" xmlns=\"http://www.w3.org/2000/svg\">\n          <g fill=\"none\" fillRule=\"evenodd\">\n            <path\n              d=\"M10 0h12a10 10 0 0110 10v12a10 10 0 01-10 10H10A10 10 0 010 22V10A10 10 0 0110 0z\"\n              fill=\"#FFF\"\n            />\n            <path\n              d=\"M5.3 10.6l10.4 6v11.1l-10.4-6v-11zm11.4-6.2l9.7 5.5-9.7 5.6V4.4z\"\n              fill=\"#555AB9\"\n            />\n            <path\n              d=\"M27.2 10.6v11.2l-10.5 6V16.5l10.5-6zM15.7 4.4v11L6 10l9.7-5.5z\"\n              fill=\"#91BAF8\"\n            />\n          </g>\n        </svg>\n        <h1>Acme</h1>\n      </div>\n      <div>\n        <div *ngIf=\"user\">\n          <span class=\"welcome\">\n            Welcome, <b>{{ user.name }}</b\n            >!\n          </span>\n          <storybook-button\n            *ngIf=\"user\"\n            size=\"small\"\n            (onClick)=\"onLogout.emit($event)\"\n            label=\"Log out\"\n          ></storybook-button>\n        </div>\n        <div *ngIf=\"!user\">\n          <storybook-button\n            *ngIf=\"!user\"\n            size=\"small\"\n            class=\"margin-left\"\n            (onClick)=\"onLogin.emit($event)\"\n            label=\"Log in\"\n          ></storybook-button>\n          <storybook-button\n            *ngIf=\"!user\"\n            primary\n            size=\"small\"\n            primary=\"true\"\n            class=\"margin-left\"\n            (onClick)=\"onCreateAccount.emit($event)\"\n            label=\"Sign up\"\n          ></storybook-button>\n        </div>\n      </div>\n    </div>\n  </header>`,\n  styleUrls: ['./header.css'],\n})\nexport default class HeaderComponent {\n  @Input()\n  user: User | null = null;\n\n  @Output()\n  onLogin = new EventEmitter<Event>();\n\n  @Output()\n  onLogout = new EventEmitter<Event>();\n\n  @Output()\n  onCreateAccount = new EventEmitter<Event>();\n}\n",
-            "assetsDirs": [],
-            "styleUrlsData": [
-                {
-                    "data": ".wrapper {\n  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;\n  border-bottom: 1px solid rgba(0, 0, 0, 0.1);\n  padding: 15px 20px;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n}\n\nsvg {\n  display: inline-block;\n  vertical-align: top;\n}\n\nh1 {\n  font-weight: 900;\n  font-size: 20px;\n  line-height: 1;\n  margin: 6px 0 6px 10px;\n  display: inline-block;\n  vertical-align: top;\n}\n\nbutton + button {\n  margin-left: 10px;\n}\n\n.welcome {\n  color: #333;\n  font-size: 14px;\n  margin-right: 10px;\n}\n",
-                    "styleUrl": "./header.css"
-                }
-            ],
-            "stylesData": ""
-        },
-        {
-            "name": "PageComponent",
-            "id": "component-PageComponent-7126d8c2607c946741c651482413b43feb72b2d63cac9d3ac173fde206a5e635eb4cdbf7ca7ac9327c7d4d05cf7ef619144c34c11609ad677081d0ee4e855064",
-            "file": "src/stories/page.component.ts",
-            "encapsulation": [],
-            "entryComponents": [],
-            "inputs": [],
-            "outputs": [],
-            "providers": [],
-            "selector": "storybook-page",
-            "styleUrls": [
-                "./page.css"
-            ],
-            "styles": [],
-            "template": "<article>    <storybook-header\n      [user]=\"user\"\n      (onLogout)=\"doLogout()\"\n      (onLogin)=\"doLogin()\"\n      (onCreateAccount)=\"doCreateAccount()\"\n    ></storybook-header>\n    <section>\n      <h2>Pages in Storybook</h2>\n      <p>\n        We recommend building UIs with a\n        <a href=\"https://componentdriven.org\" target=\"_blank\" rel=\"noopener noreferrer\">\n          <strong>component-driven</strong>\n        </a>\n        process starting with atomic components and ending with pages.\n      </p>\n      <p>\n        Render pages with mock data. This makes it easy to build and review page states without\n        needing to navigate to them in your app. Here are some handy patterns for managing page data\n        in Storybook:\n      </p>\n      <ul>\n        <li>\n          Use a higher-level connected component. Storybook helps you compose such data from the\n          \"args\" of child component stories\n        </li>\n        <li>\n          Assemble data in the page component from your services. You can mock these services out\n          using Storybook.\n        </li>\n      </ul>\n      <p>\n        Get a guided tutorial on component-driven development at\n        <a href=\"https://storybook.js.org/tutorials/\" target=\"_blank\" rel=\"noopener noreferrer\">\n          Storybook tutorials\n        </a>\n        . Read more in the\n        <a href=\"https://storybook.js.org/docs\" target=\"_blank\" rel=\"noopener noreferrer\"> docs </a>\n        .\n      </p>\n      <div class=\"tip-wrapper\">\n        <span class=\"tip\">Tip</span> Adjust the width of the canvas with the\n        <svg width=\"10\" height=\"10\" viewBox=\"0 0 12 12\" xmlns=\"http://www.w3.org/2000/svg\">\n          <g fill=\"none\" fillRule=\"evenodd\">\n            <path\n              d=\"M1.5 5.2h4.8c.3 0 .5.2.5.4v5.1c-.1.2-.3.3-.4.3H1.4a.5.5 0 01-.5-.4V5.7c0-.3.2-.5.5-.5zm0-2.1h6.9c.3 0 .5.2.5.4v7a.5.5 0 01-1 0V4H1.5a.5.5 0 010-1zm0-2.1h9c.3 0 .5.2.5.4v9.1a.5.5 0 01-1 0V2H1.5a.5.5 0 010-1zm4.3 5.2H2V10h3.8V6.2z\"\n              id=\"a\"\n              fill=\"#999\"\n            />\n          </g>\n        </svg>\n        Viewports addon in the toolbar\n      </div>\n    </section>\n  </article>",
-            "templateUrl": [],
             "viewProviders": [],
             "inputsClass": [],
             "outputsClass": [],
             "propertiesClass": [
                 {
-                    "name": "user",
-                    "defaultValue": "null",
+                    "name": "blankdays",
+                    "defaultValue": "[] as number[]",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "User | null",
+                    "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 64
+                    "line": 29
+                },
+                {
+                    "name": "datepickerValue",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 25
+                },
+                {
+                    "name": "days",
+                    "defaultValue": "['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "optional": false,
+                    "description": "",
+                    "line": 23
+                },
+                {
+                    "name": "DAYS",
+                    "defaultValue": "['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "optional": false,
+                    "description": "",
+                    "line": 22
+                },
+                {
+                    "name": "month",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "",
+                    "line": 26
+                },
+                {
+                    "name": "MONTH_NAMES",
+                    "defaultValue": "[\n    'January',\n    'February',\n    'March',\n    'April',\n    'May',\n    'June',\n    'July',\n    'August',\n    'September',\n    'October',\n    'November',\n    'December',\n  ]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "optional": false,
+                    "description": "",
+                    "line": 8
+                },
+                {
+                    "name": "no_of_days",
+                    "defaultValue": "[] as number[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 28
+                },
+                {
+                    "name": "showDatepicker",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 24
+                },
+                {
+                    "name": "trackByIdentity",
+                    "defaultValue": "() => {...}",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 80
+                },
+                {
+                    "name": "year",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "",
+                    "line": 27
                 }
             ],
             "methodsClass": [
                 {
-                    "name": "doCreateAccount",
+                    "name": "getDateValue",
+                    "args": [
+                        {
+                            "name": "date",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 55,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "date",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "getNoOfDays",
                     "args": [],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 74,
+                    "line": 61,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
                 {
-                    "name": "doLogin",
+                    "name": "initDate",
                     "args": [],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 70,
+                    "line": 38,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
                 {
-                    "name": "doLogout",
+                    "name": "isToday",
+                    "args": [
+                        {
+                            "name": "date",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "boolean",
+                    "typeParameters": [],
+                    "line": 49,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "date",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "ngOnInit",
                     "args": [],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 66,
+                    "line": 33,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -338,27 +533,395 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\nimport { User } from './User';\n\n@Component({\n  selector: 'storybook-page',\n  template: `<article>\n    <storybook-header\n      [user]=\"user\"\n      (onLogout)=\"doLogout()\"\n      (onLogin)=\"doLogin()\"\n      (onCreateAccount)=\"doCreateAccount()\"\n    ></storybook-header>\n    <section>\n      <h2>Pages in Storybook</h2>\n      <p>\n        We recommend building UIs with a\n        <a href=\"https://componentdriven.org\" target=\"_blank\" rel=\"noopener noreferrer\">\n          <strong>component-driven</strong>\n        </a>\n        process starting with atomic components and ending with pages.\n      </p>\n      <p>\n        Render pages with mock data. This makes it easy to build and review page states without\n        needing to navigate to them in your app. Here are some handy patterns for managing page data\n        in Storybook:\n      </p>\n      <ul>\n        <li>\n          Use a higher-level connected component. Storybook helps you compose such data from the\n          \"args\" of child component stories\n        </li>\n        <li>\n          Assemble data in the page component from your services. You can mock these services out\n          using Storybook.\n        </li>\n      </ul>\n      <p>\n        Get a guided tutorial on component-driven development at\n        <a href=\"https://storybook.js.org/tutorials/\" target=\"_blank\" rel=\"noopener noreferrer\">\n          Storybook tutorials\n        </a>\n        . Read more in the\n        <a href=\"https://storybook.js.org/docs\" target=\"_blank\" rel=\"noopener noreferrer\"> docs </a>\n        .\n      </p>\n      <div class=\"tip-wrapper\">\n        <span class=\"tip\">Tip</span> Adjust the width of the canvas with the\n        <svg width=\"10\" height=\"10\" viewBox=\"0 0 12 12\" xmlns=\"http://www.w3.org/2000/svg\">\n          <g fill=\"none\" fillRule=\"evenodd\">\n            <path\n              d=\"M1.5 5.2h4.8c.3 0 .5.2.5.4v5.1c-.1.2-.3.3-.4.3H1.4a.5.5 0 01-.5-.4V5.7c0-.3.2-.5.5-.5zm0-2.1h6.9c.3 0 .5.2.5.4v7a.5.5 0 01-1 0V4H1.5a.5.5 0 010-1zm0-2.1h9c.3 0 .5.2.5.4v9.1a.5.5 0 01-1 0V2H1.5a.5.5 0 010-1zm4.3 5.2H2V10h3.8V6.2z\"\n              id=\"a\"\n              fill=\"#999\"\n            />\n          </g>\n        </svg>\n        Viewports addon in the toolbar\n      </div>\n    </section>\n  </article>`,\n  styleUrls: ['./page.css'],\n})\nexport default class PageComponent {\n  user: User | null = null;\n\n  doLogout() {\n    this.user = null;\n  }\n\n  doLogin() {\n    this.user = { name: 'Jane Doe' };\n  }\n\n  doCreateAccount() {\n    this.user = { name: 'Jane Doe' };\n  }\n}\n",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'datepicker',\n  templateUrl: './datepicker.component.html',\n})\nexport class DatepickerComponent implements OnInit {\n  MONTH_NAMES = [\n    'January',\n    'February',\n    'March',\n    'April',\n    'May',\n    'June',\n    'July',\n    'August',\n    'September',\n    'October',\n    'November',\n    'December',\n  ];\n  DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];\n  days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];\n  showDatepicker = false;\n  datepickerValue!: string;\n  month!: number; // !: mean promis it will not be null, and it will definitely be assigned\n  year!: number;\n  no_of_days = [] as number[];\n  blankdays = [] as number[];\n\n  constructor() {}\n\n  ngOnInit(): void {\n    this.initDate();\n    this.getNoOfDays();\n  }\n\n  initDate() {\n    let today = new Date();\n    this.month = today.getMonth();\n    this.year = today.getFullYear();\n    this.datepickerValue = new Date(\n      this.year,\n      this.month,\n      today.getDate()\n    ).toDateString();\n  }\n\n  isToday(date: any) {\n    const today = new Date();\n    const d = new Date(this.year, this.month, date);\n    return today.toDateString() === d.toDateString() ? true : false;\n  }\n\n  getDateValue(date: any) {\n    let selectedDate = new Date(this.year, this.month, date);\n    this.datepickerValue = selectedDate.toDateString();\n    this.showDatepicker = false;\n  }\n\n  getNoOfDays() {\n    const daysInMonth = new Date(this.year, this.month + 1, 0).getDate();\n\n    // find where to start calendar day of week\n    let dayOfWeek = new Date(this.year, this.month).getDay();\n    let blankdaysArray = [];\n    for (var i = 1; i <= dayOfWeek; i++) {\n      blankdaysArray.push(i);\n    }\n\n    let daysArray = [];\n    for (var i = 1; i <= daysInMonth; i++) {\n      daysArray.push(i);\n    }\n\n    this.blankdays = blankdaysArray;\n    this.no_of_days = daysArray;\n  }\n\n  trackByIdentity = (index: number, item: any) => item;\n}\n",
             "assetsDirs": [],
-            "styleUrlsData": [
+            "styleUrlsData": "",
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [],
+                "line": 29
+            },
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<div class=\"flex items-center justify-center\">\n  <div class=\"container mx-auto px-4 py-8\">\n    <div class=\"mb-5 w-64\">\n      <div class=\"inline-block relative mt-8 w-full\">\n        <div class=\"relative z-0 w-full mb-5\">\n          <input\n            type=\"text\"\n            [(ngModel)]=\"datepickerValue\"\n            (click)=\"showDatepicker = !showDatepicker\"\n            (keydown.escape)=\"showDatepicker = false\"\n            placeholder=\" \"\n            required\n            class=\"\n              pt-3\n              pb-2\n              block\n              w-full\n              px-0\n              mt-0\n              bg-transparent\n              border-0 border-b-2\n              appearance-none\n              focus:outline-none\n              focus:ring-0\n              focus:border-black\n              border-gray-200\n            \"\n          />\n          <label\n            for=\"name\"\n            class=\"absolute duration-300 top-3 -z-1 origin-0 text-gray-500\"\n            >Date</label\n          >\n\n          <div class=\"absolute top-0 right-0 px-3 py-2\">\n            <svg\n              class=\"h-6 w-6 text-gray-400\"\n              fill=\"none\"\n              viewBox=\"0 0 24 24\"\n              stroke=\"currentColor\"\n            >\n              <path\n                stroke-linecap=\"round\"\n                stroke-linejoin=\"round\"\n                stroke-width=\"2\"\n                d=\"M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z\"\n              />\n            </svg>\n          </div>\n        </div>\n\n        <!-- <div {{no_of_days.length\"></div>\n                            <div {{32 - new Date(year, month, 32).getDate()\"></div>\n                            <div {{new Date(year, month).getDay()\"></div> -->\n        <div\n          class=\"bg-white mt-12 rounded-lg shadow p-4 absolute top-0 left-0\"\n          style=\"width: 17rem\"\n          [hidden]=\"!showDatepicker\"\n          (keydown.away)=\"showDatepicker = false\"\n        >\n          <div class=\"flex justify-between items-center mb-2\">\n            <div>\n              <span class=\"text-lg font-bold text-gray-800\">{{\n                MONTH_NAMES[month]\n              }}</span>\n              <span class=\"ml-1 text-lg text-gray-600 font-normal\">{{\n                year\n              }}</span>\n            </div>\n            <div>\n              <button\n                type=\"button\"\n                class=\"\n                  transition\n                  ease-in-out\n                  duration-100\n                  inline-flex\n                  cursor-pointer\n                  hover:bg-gray-200\n                  p-1\n                  rounded-full\n                \"\n                [ngClass]=\"{ 'cursor-not-allowed opacity-25': month === 0 }\"\n                [disabled]=\"month === 0 ? true : false\"\n                (click)=\"month = month - 1\"\n                (click)=\"getNoOfDays()\"\n              >\n                <svg\n                  class=\"h-6 w-6 text-gray-500 inline-flex\"\n                  fill=\"none\"\n                  viewBox=\"0 0 24 24\"\n                  stroke=\"currentColor\"\n                >\n                  <path\n                    stroke-linecap=\"round\"\n                    stroke-linejoin=\"round\"\n                    stroke-width=\"2\"\n                    d=\"M15 19l-7-7 7-7\"\n                  />\n                </svg>\n              </button>\n              <button\n                type=\"button\"\n                class=\"\n                  transition\n                  ease-in-out\n                  duration-100\n                  inline-flex\n                  cursor-pointer\n                  hover:bg-gray-200\n                  p-1\n                  rounded-full\n                \"\n                [ngClass]=\"{\n                  'cursor-not-allowed opacity-25': month === 11\n                }\"\n                [disabled]=\"month === 11 ? true : false\"\n                (click)=\"month = month + 1\"\n                (click)=\"getNoOfDays()\"\n              >\n                <svg\n                  class=\"h-6 w-6 text-gray-500 inline-flex\"\n                  fill=\"none\"\n                  viewBox=\"0 0 24 24\"\n                  stroke=\"currentColor\"\n                >\n                  <path\n                    stroke-linecap=\"round\"\n                    stroke-linejoin=\"round\"\n                    stroke-width=\"2\"\n                    d=\"M9 5l7 7-7 7\"\n                  />\n                </svg>\n              </button>\n            </div>\n          </div>\n\n          <div class=\"flex flex-wrap mb-3 -mx-1\">\n            <ng-container *ngFor=\"let day of DAYS; let index = index\">\n              <div style=\"width: 14.26%\" class=\"px-1\">\n                <div class=\"text-gray-800 font-medium text-center text-xs\">\n                  {{ day }}\n                </div>\n              </div>\n            </ng-container>\n          </div>\n\n          <div class=\"flex flex-wrap -mx-1\">\n            <ng-container *ngFor=\"let blankday of blankdays\">\n              <div\n                style=\"width: 14.28%\"\n                class=\"text-center border-none p-1 border-transparent text-sm\"\n              ></div>\n            </ng-container>\n            <ng-container\n              *ngFor=\"\n                let date of no_of_days;\n                let dateIndex = index;\n                trackBy: trackByIdentity\n              \"\n            >\n              <div style=\"width: 14.28%\" class=\"px-1 mb-1\">\n                <div\n                  (click)=\"getDateValue(date)\"\n                  class=\"\n                    cursor-pointer\n                    text-center text-sm\n                    rounded-full\n                    leading-loose\n                    transition\n                    ease-in-out\n                    duration-100\n                  \"\n                  [ngClass]=\"{\n                    'bg-blue-500 text-white': isToday(date) === true,\n                    'text-gray-700 hover:bg-blue-200': isToday(date) === false\n                  }\"\n                >\n                  {{ date }}\n                </div>\n              </div>\n            </ng-container>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n\n<style>\n  .-z-1 {\n    z-index: -1;\n  }\n\n  .origin-0 {\n    transform-origin: 0%;\n  }\n\n  input:focus ~ label,\n  input:not(:placeholder-shown) ~ label,\n  textarea:focus ~ label,\n  textarea:not(:placeholder-shown) ~ label,\n  select:focus ~ label,\n  select:not([value=\"\"]):valid ~ label {\n    --tw-translate-x: 0;\n    --tw-translate-y: 0;\n    --tw-rotate: 0;\n    --tw-skew-x: 0;\n    --tw-skew-y: 0;\n    transform: translateX(var(--tw-translate-x))\n      translateY(var(--tw-translate-y)) rotate(var(--tw-rotate))\n      skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x))\n      scaleY(var(--tw-scale-y));\n    --tw-scale-x: 0.75;\n    --tw-scale-y: 0.75;\n    --tw-translate-y: -1.5rem;\n  }\n\n  input:focus ~ label,\n  select:focus ~ label {\n    --tw-text-opacity: 1;\n    color: rgba(0, 0, 0, var(--tw-text-opacity));\n    left: 0px;\n  }\n</style>\n"
+        },
+        {
+            "name": "FilterComponent",
+            "id": "component-FilterComponent-7dd5b5718f15d1743b6204fc07ee5169ba0cfbf9ee3c9e67bed7d25810d4d79bfd0192f448245ac2a8d5e1bf0c2fdd51d720a887be45d9d30cf1521ae14090b2",
+            "file": "src/app/components/filter/filter.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "filter",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./filter.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
                 {
-                    "data": "section {\n  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;\n  font-size: 14px;\n  line-height: 24px;\n  padding: 48px 20px;\n  margin: 0 auto;\n  max-width: 600px;\n  color: #333;\n}\n\nsection h2 {\n  font-weight: 900;\n  font-size: 32px;\n  line-height: 1;\n  margin: 0 0 4px;\n  display: inline-block;\n  vertical-align: top;\n}\n\nsection p {\n  margin: 1em 0;\n}\n\nsection a {\n  text-decoration: none;\n  color: #1ea7fd;\n}\n\nsection ul {\n  padding-left: 30px;\n  margin: 1em 0;\n}\n\nsection li {\n  margin-bottom: 8px;\n}\n\nsection .tip {\n  display: inline-block;\n  border-radius: 1em;\n  font-size: 11px;\n  line-height: 12px;\n  font-weight: 700;\n  background: #e7fdd8;\n  color: #66bf3c;\n  padding: 4px 12px;\n  margin-right: 10px;\n  vertical-align: top;\n}\n\nsection .tip-wrapper {\n  font-size: 13px;\n  line-height: 20px;\n  margin-top: 40px;\n  margin-bottom: 40px;\n}\n\nsection .tip-wrapper svg {\n  display: inline-block;\n  height: 12px;\n  width: 12px;\n  margin-right: 4px;\n  vertical-align: top;\n  margin-top: 3px;\n}\n\nsection .tip-wrapper svg path {\n  fill: #1ea7fd;\n}\n",
-                    "styleUrl": "./page.css"
+                    "name": "companyValue",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 16
+                },
+                {
+                    "name": "countries",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "any",
+                    "optional": false,
+                    "description": "",
+                    "line": 11
+                },
+                {
+                    "name": "countryValue",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 17
+                },
+                {
+                    "name": "dateValue",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 18
+                },
+                {
+                    "name": "emailValue",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 13
+                },
+                {
+                    "name": "filterValue",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 12
+                },
+                {
+                    "name": "heroes",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "any",
+                    "optional": false,
+                    "description": "",
+                    "line": 10
+                },
+                {
+                    "name": "nameValue",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 14
+                },
+                {
+                    "name": "phoneValue",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 15
+                },
+                {
+                    "name": "query",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 19
                 }
             ],
-            "stylesData": ""
+            "methodsClass": [
+                {
+                    "name": "filter",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 44,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "getAllCountires",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 31,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 26,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Input, Component } from '@angular/core';\nimport { CountriesService } from 'src/app/services/countries/countries.service';\nimport { HeroesService } from 'src/app/services/heroes/heroes.service';\n\n@Component({\n  selector: 'filter',\n  templateUrl: './filter.component.html',\n})\nexport class FilterComponent {\n  heroes: any;\n  countries: any;\n  filterValue: string = '';\n  emailValue: string = '';\n  nameValue: string = '';\n  phoneValue: string = '';\n  companyValue: string = '';\n  countryValue: string = '';\n  dateValue: string = '';\n  query: string = '';\n\n  constructor(\n    private countriesService: CountriesService,\n    private heroesService: HeroesService\n  ) {}\n\n  ngOnInit(): void {\n    this.getAllCountires();\n  }\n\n  // Get all countires\n  getAllCountires(): void {\n    this.countriesService.list().subscribe(\n      (countries: any) => {\n        this.countries = countries;\n\n        console.log('countries', countries);\n      },\n      (error: any) => {\n        console.log(error);\n      }\n    );\n  }\n\n  filter(): void {\n    this.heroesService.filterHeroes(this.filterValue, this.query).subscribe(\n      (heroes) => {\n        this.heroes = heroes;\n      },\n      (error) => {\n        console.log(error);\n      }\n    );\n  }\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "countriesService",
+                        "type": "CountriesService",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "heroesService",
+                        "type": "HeroesService",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 19,
+                "jsdoctags": [
+                    {
+                        "name": "countriesService",
+                        "type": "CountriesService",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "heroesService",
+                        "type": "HeroesService",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "templateData": "<div class=\"bg-white p-4 flex flex-col items-center\">\n  <h1 class=\"uppercase text-center text-3xl font-bold\">Filters</h1>\n  <hr class=\"my-8\" />\n\n  <form name=\"myForm\" class=\"w-full\">\n    <input\n      [(ngModel)]=\"emailValue\"\n      type=\"email\"\n      class=\"\n        pt-3\n        pb-2\n        block\n        w-full\n        px-0\n        mt-0\n        bg-transparent\n        border-0 border-b-2\n        appearance-none\n        focus:outline-none\n        focus:ring-0\n        focus:border-gray-400\n        border-gray-200\n      \"\n      placeholder=\"example@gmail.com\"\n    />\n\n    <input\n      [(ngModel)]=\"phoneValue\"\n      type=\"tel\"\n      class=\"\n        pt-3\n        pb-2\n        block\n        w-full\n        px-0\n        mt-8\n        bg-transparent\n        border-0 border-b-2\n        appearance-none\n        focus:outline-none\n        focus:ring-0\n        focus:border-gray-400\n        border-gray-200\n      \"\n      placeholder=\"123456789\"\n    />\n\n    <input\n      [(ngModel)]=\"nameValue\"\n      type=\"text\"\n      class=\"\n        pt-3\n        pb-2\n        block\n        w-full\n        px-0\n        mt-8\n        bg-transparent\n        border-0 border-b-2\n        appearance-none\n        focus:outline-none\n        focus:ring-0\n        focus:border-gray-400\n        border-gray-200\n      \"\n      placeholder=\"John Doe\"\n    />\n\n    <input\n      [(ngModel)]=\"companyValue\"\n      type=\"text\"\n      class=\"\n        pt-3\n        pb-2\n        block\n        w-full\n        px-0\n        mt-8\n        bg-transparent\n        border-0 border-b-2\n        appearance-none\n        focus:outline-none\n        focus:ring-0\n        focus:border-gray-400\n        border-gray-200\n      \"\n      placeholder=\"Company\"\n    />\n\n    <div class=\"inline-block relative mt-8 w-full\">\n      <div class=\"relative z-0 w-full\">\n        <select\n          name=\"select\"\n          value=\"\"\n          [(ngModel)]=\"countryValue\"\n          onclick=\"this.setAttribute('value', this.value);\"\n          class=\"\n            pt-3\n            pb-2\n            block\n            w-full\n            px-0\n            mt-0\n            bg-transparent\n            border-0 border-b-2\n            appearance-none\n            z-1\n            focus:outline-none\n            focus:ring-0\n            focus:border-gray-400\n            border-gray-200\n          \"\n        >\n          <option value=\"\" selected disabled hidden></option>\n          <option value=\"1\">USA</option>\n          <option value=\"2\">Option 2</option>\n          <option value=\"3\">Option 3</option>\n          <option value=\"4\">Option 4</option>\n          <option value=\"5\">Option 5</option>\n        </select>\n        <label\n          for=\"select\"\n          class=\"absolute duration-300 top-3 -z-1 origin-0 text-gray-500 mb-6\"\n          >Country</label\n        >\n        <span class=\"text-sm text-red-600 hidden\" id=\"error\"\n          >Option has to be selected</span\n        >\n      </div>\n      <div\n        class=\"\n          pointer-events-none\n          absolute\n          inset-y-0\n          right-0\n          flex\n          items-center\n          px-2\n          text-gray-700\n        \"\n      >\n        <svg\n          class=\"fill-current h-4 w-4\"\n          xmlns=\"http://www.w3.org/2000/svg\"\n          viewBox=\"0 0 20 20\"\n        >\n          <path\n            d=\"M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z\"\n          />\n        </svg>\n      </div>\n    </div>\n\n    <datepicker></datepicker>\n\n    <div class=\"text-center\">\n      <button\n        (click)=\"filter()\"\n        type=\"button\"\n        class=\"\n          text-white\n          bg-blue-600\n          hover:bg-blue-800\n          focus:ring-4 focus:ring-blue-300\n          font-medium\n          rounded\n          text-sm\n          px-5\n          py-2.5\n          text-center\n          inline-flex\n          items-center\n          mr-2\n          dark:bg-blue-600\n          dark:hover:bg-blue-700\n          dark:focus:ring-blue-800\n        \"\n      >\n        <svg\n          xmlns=\"http://www.w3.org/2000/svg\"\n          class=\"h-4 w-4 mr-2\"\n          fill=\"none\"\n          viewBox=\"0 0 24 24\"\n          stroke=\"#FFF\"\n          stroke-width=\"2\"\n        >\n          <path\n            stroke-linecap=\"round\"\n            stroke-linejoin=\"round\"\n            d=\"M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z\"\n          />\n        </svg>\n        Filter\n      </button>\n    </div>\n  </form>\n</div>\n\n<style>\n  .-z-1 {\n    z-index: -1;\n  }\n\n  .origin-0 {\n    transform-origin: 0%;\n  }\n\n  input:focus ~ label,\n  input:not(:placeholder-shown) ~ label,\n  textarea:focus ~ label,\n  textarea:not(:placeholder-shown) ~ label,\n  select:focus ~ label,\n  select:not([value=\"\"]):valid ~ label {\n    --tw-translate-x: 0;\n    --tw-translate-y: 0;\n    --tw-rotate: 0;\n    --tw-skew-x: 0;\n    --tw-skew-y: 0;\n    transform: translateX(var(--tw-translate-x))\n      translateY(var(--tw-translate-y)) rotate(var(--tw-rotate))\n      skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x))\n      scaleY(var(--tw-scale-y));\n    --tw-scale-x: 0.75;\n    --tw-scale-y: 0.75;\n    --tw-translate-y: -1.5rem;\n  }\n\n  input:focus ~ label,\n  select:focus ~ label {\n    --tw-text-opacity: 1;\n    color: rgba(0, 0, 0, var(--tw-text-opacity));\n    left: 0px;\n  }\n</style>\n"
+        },
+        {
+            "name": "TableComponent",
+            "id": "component-TableComponent-c68152b5a5ad672ea8d8593e85d45509268a6b05a91cfcff58c88eddfad15a4778771650b60bb01bb1b0acbe9aa2d34759db82e4be976f0684f335fea877ee6a",
+            "file": "src/app/components/table/table.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "heroes-table",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./table.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [
+                {
+                    "name": "showFilter",
+                    "defaultValue": "new EventEmitter<boolean>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 16,
+                    "type": "EventEmitter"
+                },
+                {
+                    "name": "toggleFilter",
+                    "defaultValue": "new EventEmitter<void>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 15,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [
+                {
+                    "name": "heroes",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "any",
+                    "optional": false,
+                    "description": "",
+                    "line": 9
+                },
+                {
+                    "name": "searchName",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 10
+                },
+                {
+                    "name": "showSearch",
+                    "defaultValue": "true",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "optional": false,
+                    "description": "",
+                    "line": 11
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "getAllHeroes",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 38,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 18,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "rotateIcon",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "\"rotate-0\" | \"\"",
+                    "typeParameters": [],
+                    "line": 24,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "searchByName",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 50,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "toggleShowSearch",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 33,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Output, EventEmitter, Component } from '@angular/core';\nimport { HeroesService } from 'src/app/services/heroes/heroes.service';\n\n@Component({\n  selector: 'heroes-table',\n  templateUrl: './table.component.html',\n})\nexport class TableComponent {\n  heroes: any;\n  searchName: string = '';\n  showSearch: boolean = true;\n\n  constructor(private heroesService: HeroesService) {}\n\n  @Output() toggleFilter = new EventEmitter<void>();\n  @Output() showFilter = new EventEmitter<boolean>();\n\n  ngOnInit(): void {\n    this.getAllHeroes();\n\n    console.log('showFilter', this.showFilter);\n  }\n\n  rotateIcon() {\n    if (!this.showFilter) {\n      return `rotate-0`;\n    } else {\n      return ``;\n    }\n  }\n\n  // Toggle search input field\n  toggleShowSearch() {\n    this.showSearch = !this.showSearch;\n  }\n\n  // Get all heroes\n  getAllHeroes(): void {\n    this.heroesService.list().subscribe(\n      (heroes: any) => {\n        this.heroes = heroes;\n      },\n      (error: any) => {\n        console.log(error);\n      }\n    );\n  }\n\n  // Search heroes by name\n  searchByName(): void {\n    this.searchName\n      ? this.heroesService.filterHeroes(this.searchName, 'name').subscribe(\n          (heroes) => {\n            this.heroes = heroes;\n          },\n          (error) => {\n            console.log(error);\n          }\n        )\n      : this.getAllHeroes();\n  }\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "heroesService",
+                        "type": "HeroesService",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 11,
+                "jsdoctags": [
+                    {
+                        "name": "heroesService",
+                        "type": "HeroesService",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "templateData": "<div class=\"bg-white shadow-md rounded font-mono-hat text-xs\">\n  <div class=\"px-6 py-4 flex items-center justify-between\">\n    <p class=\"font-bold\">Heroes</p>\n\n    <div class=\"flex items-center\">\n      <button\n        (click)=\"searchByName()\"\n        class=\"\n          flex\n          items-center\n          border-0 border-b-2\n          appearance-none\n          focus:border-gray-500\n          border-gray-200\n        \"\n      >\n        <input\n          [(ngModel)]=\"searchName\"\n          *ngIf=\"showSearch\"\n          type=\"text\"\n          class=\"\n            pt-3\n            pb-2\n            block\n            w-full\n            mr-4\n            px-0\n            mt-0\n            bg-transparent\n            focus:outline-none\n            focus:border-gray-500\n            focus:ring-0\n          \"\n          placeholder=\"Search hero by name\"\n        />\n        <svg\n          xmlns=\"http://www.w3.org/2000/svg\"\n          class=\"h-5 w-5\"\n          fill=\"none\"\n          viewBox=\"0 0 24 24\"\n          stroke=\"#b8b8b8\"\n          stroke-width=\"2\"\n        >\n          <path\n            stroke-linecap=\"round\"\n            stroke-linejoin=\"round\"\n            d=\"M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z\"\n          />\n        </svg>\n      </button>\n\n      <button (click)=\"toggleFilter.emit()\" [ngClass]=\"rotateIcon()\">\n        <svg\n          xmlns=\"http://www.w3.org/2000/svg\"\n          class=\"h-5 w-5 transform rotate-90 ml-6\"\n          fill=\"none\"\n          viewBox=\"0 0 24 24\"\n          stroke=\"#b8b8b8\"\n          stroke-width=\"2\"\n        >\n          <path\n            stroke-linecap=\"round\"\n            stroke-linejoin=\"round\"\n            d=\"M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4\"\n          />\n        </svg>\n      </button>\n    </div>\n  </div>\n\n  <table class=\"text-left w-full border-collapse\">\n    <thead>\n      <tr class=\"bg-gray-100\">\n        <th class=\"px-6 py-4\">Name</th>\n        <th class=\"px-6 py-4\">Phone</th>\n        <th class=\"px-6 py-4\">Email</th>\n        <th class=\"px-6 py-4\">Date</th>\n        <th class=\"px-6 py-4\">Country</th>\n        <th class=\"px-6 py-4\">Company</th>\n      </tr>\n    </thead>\n    <tbody *ngFor=\"let heroe of heroes\">\n      <tr class=\"hover:bg-grey-lighter\">\n        <td class=\"py-4 px-6 border-b border-grey-light capitalize\">{{ heroe.name }}</td>\n        <td class=\"py-4 px-6 border-b border-grey-light\">\n          {{ heroe.phone }}\n        </td>\n        <td class=\"py-4 px-6 border-b border-grey-light\">\n          {{ heroe.email }}\n        </td>\n        <td class=\"py-4 px-6 border-b border-grey-light\">\n          {{ heroe.date }}\n        </td>\n        <td class=\"py-4 px-6 border-b border-grey-light\">\n          {{ heroe.country }}\n        </td>\n        <td class=\"py-4 px-6 border-b border-grey-light\">\n          {{ heroe.company }}\n        </td>\n      </tr>\n    </tbody>\n  </table>\n</div>\n\n<style>\n  .rotate-icon {\n    transform: rotate(0deg);\n  }\n</style>\n"
         }
     ],
     "modules": [
         {
             "name": "AppModule",
-            "id": "module-AppModule-2ec58e7a32463b9b6cd970cb31e08e29029a47873b1b978b2bb334fc7975f6f5b3557f06f1d8edb8d9117c1bc37b26d4301c2a5e8ccced6f4a56dde5c6a98af4",
+            "id": "module-AppModule-98f08ad48100222c638c5de7a8826e1383056e53bd659196e5c7bbfc10b0e293fb76d49263017702e0fceb2f242775ec2cfe68789c2a4a85f54ad5a036cb5b41",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/app/app.module.ts",
             "methods": [],
-            "sourceCode": "import { NgModule } from '@angular/core';\nimport { BrowserModule } from '@angular/platform-browser';\n\nimport { AppComponent } from './app.component';\n\n@NgModule({\n  declarations: [\n    AppComponent\n  ],\n  imports: [\n    BrowserModule\n  ],\n  providers: [],\n  bootstrap: [AppComponent]\n})\nexport class AppModule { }\n",
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { BrowserModule } from '@angular/platform-browser';\nimport { AppComponent } from './app.component';\nimport { FilterComponent } from './components/filter/filter.component';\nimport { TableComponent } from './components/table/table.component';\nimport { DatepickerComponent } from './components/datepicker/datepicker.component';\nimport { FormsModule } from '@angular/forms';\nimport { HttpClientModule } from '@angular/common/http';\n\n@NgModule({\n  declarations: [\n    AppComponent,\n    FilterComponent,\n    DatepickerComponent,\n    TableComponent,\n  ],\n  imports: [BrowserModule, FormsModule, HttpClientModule],\n  providers: [],\n  bootstrap: [AppComponent],\n})\nexport class AppModule {}",
             "children": [
                 {
                     "type": "providers",
@@ -369,6 +932,15 @@
                     "elements": [
                         {
                             "name": "AppComponent"
+                        },
+                        {
+                            "name": "DatepickerComponent"
+                        },
+                        {
+                            "name": "FilterComponent"
+                        },
+                        {
+                            "name": "TableComponent"
                         }
                     ]
                 },
@@ -387,6 +959,118 @@
                             "name": "AppComponent"
                         }
                     ]
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "DatepickerModule",
+            "id": "module-DatepickerModule-c31dcf896e28372f39bb8d26e7738a76c2e083bf33e1c1b90a01ec11ae8f1ec0a30319711ef49da27a72a71b2ca781c68c76e07d9561579924bbb3b1d7828ca8",
+            "description": "",
+            "deprecationMessage": "",
+            "deprecated": false,
+            "file": "src/app/components/datepicker/datepicker.module.ts",
+            "methods": [],
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { FormsModule } from '@angular/forms';\nimport { BrowserModule } from '@angular/platform-browser';\n\n@NgModule({\n  declarations: [],\n  imports: [BrowserModule, FormsModule],\n  providers: [],\n  bootstrap: [],\n})\nexport class DatepickerModule {}\n",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": []
+                },
+                {
+                    "type": "imports",
+                    "elements": []
+                },
+                {
+                    "type": "exports",
+                    "elements": []
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "FilterModule",
+            "id": "module-FilterModule-ef9a5ff1202d8838add7ef2ff1ae842e325fb6b10262ab7b2df6ab17edd44bb4232f4d6b9cd3f66ee2c00412919c44fb16b75e7ecdd81fc9e5b120989d63af40",
+            "description": "",
+            "deprecationMessage": "",
+            "deprecated": false,
+            "file": "src/app/components/filter/filter.module.ts",
+            "methods": [],
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { BrowserModule } from '@angular/platform-browser';\nimport { DatepickerComponent } from '../datepicker/datepicker.component';\n\n@NgModule({\n  declarations: [DatepickerComponent],\n  imports: [BrowserModule],\n  providers: [],\n  bootstrap: [],\n})\nexport class FilterModule {}\n",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": [
+                        {
+                            "name": "DatepickerComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "imports",
+                    "elements": []
+                },
+                {
+                    "type": "exports",
+                    "elements": []
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "TableModule",
+            "id": "module-TableModule-daf6a37b53ec4d2317d3a1db83edbb7e37130764ba5740d8c12f257941a12b8df8075a57e6a0b7696c4ea151383a08301f502dd82bc86bfbc09e8203179d25c9",
+            "description": "",
+            "deprecationMessage": "",
+            "deprecated": false,
+            "file": "src/app/components/table/table.module.ts",
+            "methods": [],
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { BrowserModule } from '@angular/platform-browser';\n\n@NgModule({\n  declarations: [],\n  imports: [BrowserModule],\n  providers: [],\n  bootstrap: [],\n})\nexport class TableModule {}\n",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": []
+                },
+                {
+                    "type": "imports",
+                    "elements": []
+                },
+                {
+                    "type": "exports",
+                    "elements": []
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
                 },
                 {
                     "type": "classes",
@@ -428,50 +1112,20 @@
                 "defaultValue": "{\n  production: false\n}"
             },
             {
-                "name": "Large",
+                "name": "heroes",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/stories/Button.stories.ts",
+                "file": "src/app/components/table/table.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "Template.bind({})"
+                "type": "[]",
+                "defaultValue": "[\n  {\n    name: 'Kathryn Murphy',\n    phone: '(252) 555-0126',\n    email: 'tanya.hill@example.com',\n    date: 'March 6, 2018',\n    country: 'Saudi Arabia',\n    company: \"L'Oreal\",\n  },\n  {\n    name: 'Kathryn Murphy',\n    phone: '(252) 555-0126',\n    email: 'tanya.hill@example.com',\n    date: 'March 6, 2018',\n    country: 'Saudi Arabia',\n    company: \"L'Oreal\",\n  },\n  {\n    name: 'Kathryn Murphy',\n    phone: '(252) 555-0126',\n    email: 'tanya.hill@example.com',\n    date: 'March 6, 2018',\n    country: 'Saudi Arabia',\n    company: \"L'Oreal\",\n  },\n  {\n    name: 'Kathryn Murphy',\n    phone: '(252) 555-0126',\n    email: 'tanya.hill@example.com',\n    date: 'March 6, 2018',\n    country: 'Saudi Arabia',\n    company: \"L'Oreal\",\n  },\n]"
             },
             {
-                "name": "LoggedIn",
+                "name": "Primary",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/stories/Header.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "Template.bind({})"
-            },
-            {
-                "name": "LoggedIn",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/stories/Page.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "Template.bind({})"
-            },
-            {
-                "name": "LoggedOut",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/stories/Header.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "Template.bind({})"
-            },
-            {
-                "name": "LoggedOut",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/stories/Page.stories.ts",
+                "file": "src/app/components/datepicker/datepicker.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -481,7 +1135,17 @@
                 "name": "Primary",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/stories/Button.stories.ts",
+                "file": "src/app/components/filter/filter.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "Primary",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/table/table.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -497,54 +1161,34 @@
                 "type": "literal type"
             },
             {
-                "name": "Secondary",
+                "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/stories/Button.stories.ts",
+                "file": "src/app/components/datepicker/datepicker.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "Template.bind({})"
-            },
-            {
-                "name": "Small",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/stories/Button.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "Template.bind({})"
+                "type": "Story<DatepickerComponent>",
+                "defaultValue": "(args: DatepickerComponent) => ({\n  props: args,\n})"
             },
             {
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/stories/Button.stories.ts",
+                "file": "src/app/components/filter/filter.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story<Button>",
-                "defaultValue": "(args: Button) => ({\n  props: args,\n})"
+                "type": "Story<FilterComponent>",
+                "defaultValue": "(args: FilterComponent) => ({\n  props: args,\n})"
             },
             {
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/stories/Header.stories.ts",
+                "file": "src/app/components/table/table.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story<Header>",
-                "defaultValue": "(args: Header) => ({\n  props: args,\n})"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/stories/Page.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story<Page>",
-                "defaultValue": "(args: Page) => ({\n  props: args,\n})"
+                "type": "Story<TableComponent>",
+                "defaultValue": "(args: TableComponent) => ({\n  props: args,\n})"
             }
         ],
         "functions": [],
@@ -596,42 +1240,22 @@
                     "defaultValue": "{\n  production: false\n}"
                 }
             ],
-            "src/stories/Button.stories.ts": [
+            "src/app/components/table/table.stories.ts": [
                 {
-                    "name": "Large",
+                    "name": "heroes",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "src/stories/Button.stories.ts",
+                    "file": "src/app/components/table/table.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
+                    "type": "[]",
+                    "defaultValue": "[\n  {\n    name: 'Kathryn Murphy',\n    phone: '(252) 555-0126',\n    email: 'tanya.hill@example.com',\n    date: 'March 6, 2018',\n    country: 'Saudi Arabia',\n    company: \"L'Oreal\",\n  },\n  {\n    name: 'Kathryn Murphy',\n    phone: '(252) 555-0126',\n    email: 'tanya.hill@example.com',\n    date: 'March 6, 2018',\n    country: 'Saudi Arabia',\n    company: \"L'Oreal\",\n  },\n  {\n    name: 'Kathryn Murphy',\n    phone: '(252) 555-0126',\n    email: 'tanya.hill@example.com',\n    date: 'March 6, 2018',\n    country: 'Saudi Arabia',\n    company: \"L'Oreal\",\n  },\n  {\n    name: 'Kathryn Murphy',\n    phone: '(252) 555-0126',\n    email: 'tanya.hill@example.com',\n    date: 'March 6, 2018',\n    country: 'Saudi Arabia',\n    company: \"L'Oreal\",\n  },\n]"
                 },
                 {
                     "name": "Primary",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "src/stories/Button.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "Secondary",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/Button.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "Small",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/Button.stories.ts",
+                    "file": "src/app/components/table/table.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
@@ -641,29 +1265,19 @@
                     "name": "Template",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "src/stories/Button.stories.ts",
+                    "file": "src/app/components/table/table.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "Story<Button>",
-                    "defaultValue": "(args: Button) => ({\n  props: args,\n})"
+                    "type": "Story<TableComponent>",
+                    "defaultValue": "(args: TableComponent) => ({\n  props: args,\n})"
                 }
             ],
-            "src/stories/Header.stories.ts": [
+            "src/app/components/datepicker/datepicker.stories.ts": [
                 {
-                    "name": "LoggedIn",
+                    "name": "Primary",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "src/stories/Header.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "LoggedOut",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/Header.stories.ts",
+                    "file": "src/app/components/datepicker/datepicker.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
@@ -673,29 +1287,19 @@
                     "name": "Template",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "src/stories/Header.stories.ts",
+                    "file": "src/app/components/datepicker/datepicker.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "Story<Header>",
-                    "defaultValue": "(args: Header) => ({\n  props: args,\n})"
+                    "type": "Story<DatepickerComponent>",
+                    "defaultValue": "(args: DatepickerComponent) => ({\n  props: args,\n})"
                 }
             ],
-            "src/stories/Page.stories.ts": [
+            "src/app/components/filter/filter.stories.ts": [
                 {
-                    "name": "LoggedIn",
+                    "name": "Primary",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "src/stories/Page.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "LoggedOut",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/Page.stories.ts",
+                    "file": "src/app/components/filter/filter.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
@@ -705,11 +1309,11 @@
                     "name": "Template",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "src/stories/Page.stories.ts",
+                    "file": "src/app/components/filter/filter.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "Story<Page>",
-                    "defaultValue": "(args: Page) => ({\n  props: args,\n})"
+                    "type": "Story<FilterComponent>",
+                    "defaultValue": "(args: FilterComponent) => ({\n  props: args,\n})"
                 }
             ]
         },
@@ -719,7 +1323,7 @@
     },
     "routes": [],
     "coverage": {
-        "count": 4,
+        "count": 0,
         "status": "low",
         "files": [
             {
@@ -728,7 +1332,122 @@
                 "linktype": "component",
                 "name": "AppComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/2",
+                "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/datepicker/datepicker.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "DatepickerComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/17",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/datepicker/datepicker.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Primary",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/datepicker/datepicker.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/filter/filter.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "FilterComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/15",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/filter/filter.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Primary",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/filter/filter.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/table/table.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "TableComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/12",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/table/table.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "heroes",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/table/table.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Primary",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/table/table.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/services/countries/countries.service.ts",
+                "type": "injectable",
+                "linktype": "injectable",
+                "name": "CountriesService",
+                "coveragePercent": 0,
+                "coverageCount": "0/6",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/services/heroes/heroes.service.ts",
+                "type": "injectable",
+                "linktype": "injectable",
+                "name": "HeroesService",
+                "coveragePercent": 0,
+                "coverageCount": "0/7",
                 "status": "low"
             },
             {
@@ -749,152 +1468,6 @@
                 "name": "environment",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/Button.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Large",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/Button.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Primary",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/Button.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Secondary",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/Button.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Small",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/Button.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Template",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/Header.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "LoggedIn",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/Header.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "LoggedOut",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/Header.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Template",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/Page.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "LoggedIn",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/Page.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "LoggedOut",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/Page.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Template",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/User.ts",
-                "type": "interface",
-                "linktype": "interface",
-                "name": "User",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/button.component.ts",
-                "type": "component",
-                "linktype": "component",
-                "name": "ButtonComponent",
-                "coveragePercent": 83,
-                "coverageCount": "5/6",
-                "status": "very-good"
-            },
-            {
-                "filePath": "src/stories/header.component.ts",
-                "type": "component",
-                "linktype": "component",
-                "name": "HeaderComponent",
-                "coveragePercent": 0,
-                "coverageCount": "0/5",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/page.component.ts",
-                "type": "component",
-                "linktype": "component",
-                "name": "PageComponent",
-                "coveragePercent": 0,
-                "coverageCount": "0/5",
                 "status": "low"
             },
             {

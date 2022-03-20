@@ -1,1 +1,13 @@
-<div class="bg-black h-screen"></div>
+<div class="p-8">
+  <div class="flex items-start">
+    <div class="w-3/12" [hidden]="!this.showFilter">
+      <filter></filter>
+    </div>
+    <div class="ml-6" [ngClass]="getTableWidth()">
+      <heroes-table
+        (toggleFilter)="toggleFilter()"
+        (showFilter)="(this.showFilter)"
+      ></heroes-table>
+    </div>
+  </div>
+</div>
